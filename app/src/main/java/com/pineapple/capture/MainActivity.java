@@ -4,14 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pineapple.capture.activities.LoginActivity;
 import com.pineapple.capture.databinding.ActivityMainBinding;
+import com.pineapple.capture.fragment.CameraFragment;
+import com.pineapple.capture.fragment.HomeFragment;
+import com.pineapple.capture.fragment.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -23,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        MenuItem cameraItem = binding.bottomNavigation.getMenu().findItem(R.id.navigation_camera);
+        cameraItem.setIconTintList(null);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -42,17 +51,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up bottom navigation
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.navigation_home) {
-                // TODO: Switch to home fragment
-                return true;
-            } else if (itemId == R.id.navigation_camera) {
-                // TODO: Switch to camera fragment
-                return true;
-            } else if (itemId == R.id.navigation_profile) {
-                // TODO: Switch to profile fragment
+            Fragment selectedFragment = null;
+
+            if (item.getItemId() == R.id.navigation_home) {
+                selectedFragment = new HomeFragment();
+            } else if (item.getItemId() == R.id.navigation_camera) {
+                selectedFragment = new CameraFragment();
+            } else if (item.getItemId() == R.id.navigation_profile) {
+                selectedFragment = new ProfileFragment();
+            }
+
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
                 return true;
             }
+
             return false;
         });
 
