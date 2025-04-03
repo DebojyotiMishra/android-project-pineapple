@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/camera_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@color/background_dark"
+    android:padding="16dp">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
@@ -16,7 +16,40 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/gray"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="90dp" />
+
+    <ImageButton
+        android:id="@+id/capture_button"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:src="@drawable/ic_camera"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="20dp" />
+
+    <ImageButton
+        android:id="@+id/toggle_flash"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:src="@drawable/flash"
+        android:layout_gravity="top|right"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp" />
+
+    <ImageButton
+        android:id="@+id/switch_camera_button"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:src="@drawable/flip_cam"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="20dp"
+        android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
 </FrameLayout>
